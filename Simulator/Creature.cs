@@ -1,9 +1,35 @@
 namespace Simulator;
 
+using System;
+
 public class Creature
 {
-    public string Name { get; set; }
-    public int Level { get; set; }
+    private string _name = "Unknown";
+    private int _level = 1;
+
+    public string Name
+    {
+        get => _name;
+        set
+        {
+            if (_name != "Unknown") return; // Można ustawić tylko raz
+            var trimmed = value.Trim();
+            if (trimmed.Length < 3) trimmed = trimmed.PadRight(3, '#');
+            if (trimmed.Length > 25) trimmed = trimmed.Substring(0, 25).TrimEnd();
+            if (trimmed.Length < 3) trimmed = trimmed.PadRight(3, '#');
+            _name = char.ToUpper(trimmed[0]) + trimmed.Substring(1);
+        }
+    }
+
+    public int Level
+    {
+        get => _level;
+        set
+        {
+            if (_level != 1) return; // Można ustawić tylko raz
+            _level = Math.Clamp(value, 1, 10);
+        }
+    }
 
     public Creature(string name, int level = 1)
     {
@@ -20,5 +46,11 @@ public class Creature
     public void SayHi()
     {
         Console.WriteLine($"Hi, I'm {Name} at Level {Level}!");
+    }
+
+    public void Upgrade()
+    {
+        if (Level < 10)
+            Level++;
     }
 }
