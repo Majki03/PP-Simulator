@@ -23,3 +23,4 @@ c:\Users\majki\Desktop\Studia\Rok 2\Semestr 1\Pracownia Programowania 3\PP-Simul
 c:\Users\majki\Desktop\Studia\Rok 2\Semestr 1\Pracownia Programowania 3\PP-Simulator\Simulator\obj\Debug\net8.0\Simulator.pdb
 c:\Users\majki\Desktop\Studia\Rok 2\Semestr 1\Pracownia Programowania 3\PP-Simulator\Simulator\obj\Debug\net8.0\Simulator.genruntimeconfig.cache
 c:\Users\majki\Desktop\Studia\Rok 2\Semestr 1\Pracownia Programowania 3\PP-Simulator\Simulator\obj\Debug\net8.0\ref\Simulator.dll
+c:\Users\majki\Desktop\Studia\Rok 2\Semestr 1\Pracownia Programowania 3\PP-Simulator\Simulator\obj\Debug\net8.0\Simulator.sourcelink.json
