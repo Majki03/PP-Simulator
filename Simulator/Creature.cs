@@ -40,6 +40,13 @@ public abstract class Creature
     public abstract void SayHi();
 
     public abstract int Power { get; }
+
+    public abstract string Info { get; }
+
+    public override string ToString()
+    {
+        return $"{GetType().Name.ToUpper()}: {Info}";
+    }
 }
 
 public class Elf : Creature
@@ -77,6 +84,8 @@ public class Elf : Creature
     }
 
     public override int Power => (Level * 8) + (Agility * 2);
+
+    public override string Info => $"{Name} [{Level}][{Agility}]";
 }
 
 public class Orc : Creature
@@ -114,4 +123,6 @@ public class Orc : Creature
     }
 
     public override int Power => (Level * 7) + (Rage * 3);
+
+    public override string Info => $"{Name} [{Level}][{Rage}]";
 }
