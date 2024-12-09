@@ -13,11 +13,7 @@ public abstract class Creature
         set
         {
             if (_name != "Unknown") return;
-            var trimmed = value.Trim();
-            if (trimmed.Length < 3) trimmed = trimmed.PadRight(3, '#');
-            if (trimmed.Length > 25) trimmed = trimmed.Substring(0, 25).TrimEnd();
-            if (trimmed.Length < 3) trimmed = trimmed.PadRight(3, '#');
-            _name = char.ToUpper(trimmed[0]) + trimmed.Substring(1);
+            _name = Validator.Shortener(value, 3, 25, '#');
         }
     }
 
@@ -27,7 +23,7 @@ public abstract class Creature
         set
         {
             if (_level != 1) return;
-            _level = Math.Clamp(value, 1, 10);
+            _level = Validator.Limiter(value, 1, 10);
         }
     }
 
@@ -54,7 +50,7 @@ public class Elf : Creature
     public int Agility
     {
         get => _agility;
-        private set => _agility = Math.Clamp(value, 0, 10);
+        private set => _agility = Validator.Limiter(value, 0, 10);
     }
 
     public Elf(string name, int level = 1, int agility = 0) : base(name, level)
@@ -91,7 +87,7 @@ public class Orc : Creature
     public int Rage
     {
         get => _rage;
-        private set => _rage = Math.Clamp(value, 0, 10);
+        private set => _rage = Validator.Limiter(value, 0, 10);
     }
 
     public Orc(string name, int level = 1, int rage = 0) : base(name, level)
