@@ -15,5 +15,24 @@ public class Animals
 
     public uint Size { get; set; } = 3;
 
-    public string Info => $"{Description} <{Size}>";
+    public virtual string Info => $"{Description} <{Size}>";
+
+    public override string ToString()
+    {
+        return $"{GetType().Name.ToUpper()}: {Info}";
+    }
+}
+
+public class Birds : Animals
+{
+    public bool CanFly { get; set; } = true;
+
+    public override string Info
+    {
+        get
+        {
+            string flyStatus = CanFly ? "fly+" : "fly-";
+            return $"{Description} ({flyStatus}) <{Size}>";
+        }
+    }
 }
