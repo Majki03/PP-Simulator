@@ -7,19 +7,33 @@ namespace Simulator
         private static void Main(string[] args)
         {
             Console.WriteLine("Starting Simulator!\n");
-            Lab4b();
+            Lab5a();
         }
 
-        private static void Lab4b()
+        private static void Lab5a()
         {
-            object[] myObjects = {
-                new Animals() { Description = "dogs"},
-                new Birds { Description = "  eagles ", Size = 10 },
-                new Elf("e", 15, -3),
-                new Orc("morgash", 6, 4)
-            };
-            Console.WriteLine("\nMy objects:");
-            foreach (var o in myObjects) Console.WriteLine(o);
+            try
+            {
+                var rect1 = new Rectangle(2, 3, 5, 7);
+                Console.WriteLine(rect1);
+
+                var rect2 = new Rectangle(new Point(10, 15), new Point(5, 20));
+                Console.WriteLine(rect2);
+
+                var rect3 = new Rectangle(5, 5, 5, 10); // Exception expected
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Exception caught: {ex.Message}");
+            }
+
+            var rect = new Rectangle(0, 0, 10, 10);
+            var insidePoint = new Point(5, 5);
+            var outsidePoint = new Point(15, 15);
+
+            Console.WriteLine($"Rectangle: {rect}");
+            Console.WriteLine($"Contains {insidePoint}: {rect.Contains(insidePoint)}");
+            Console.WriteLine($"Contains {outsidePoint}: {rect.Contains(outsidePoint)}");
         }
     }
 }
