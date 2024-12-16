@@ -1,6 +1,6 @@
 using Simulator;
-
-namespace Simulator.Maps;
+using Simulator.Maps;
+using Xunit;
 
 /// <summary>
 /// Map of points.

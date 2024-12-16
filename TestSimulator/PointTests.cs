@@ -1,4 +1,5 @@
-namespace Simulator;
+using Simulator;
+using Xunit;
 
 public readonly struct Point
 {
