@@ -1,4 +1,5 @@
 using System;
+using Simulator.Maps;
 
 namespace Simulator
 {
@@ -7,33 +8,32 @@ namespace Simulator
         private static void Main(string[] args)
         {
             Console.WriteLine("Starting Simulator!\n");
-            Lab5a();
+            Lab5b();
         }
 
-        private static void Lab5a()
+        private static void Lab5b()
         {
             try
             {
-                var rect1 = new Rectangle(2, 3, 5, 7);
-                Console.WriteLine(rect1);
+                var map = new SmallSquareMap(10);
+                Console.WriteLine($"Map created with size {map.Size}.");
 
-                var rect2 = new Rectangle(new Point(10, 15), new Point(5, 20));
-                Console.WriteLine(rect2);
+                var point1 = new Point(5, 5);
+                var point2 = new Point(10, 10);
 
-                var rect3 = new Rectangle(5, 5, 5, 10); // Exception expected
+                Console.WriteLine($"Point {point1} exists: {map.Exist(point1)}");
+                Console.WriteLine($"Point {point2} exists: {map.Exist(point2)}");
+
+                var nextPoint = map.Next(point1, Direction.Right);
+                Console.WriteLine($"Next point from {point1} to the Right: {nextPoint}");
+
+                var nextDiagonalPoint = map.NextDiagonal(point1, Direction.Up);
+                Console.WriteLine($"Next diagonal point from {point1} to the Up: {nextDiagonalPoint}");
             }
-            catch (ArgumentException ex)
+            catch (ArgumentOutOfRangeException ex)
             {
                 Console.WriteLine($"Exception caught: {ex.Message}");
             }
-
-            var rect = new Rectangle(0, 0, 10, 10);
-            var insidePoint = new Point(5, 5);
-            var outsidePoint = new Point(15, 15);
-
-            Console.WriteLine($"Rectangle: {rect}");
-            Console.WriteLine($"Contains {insidePoint}: {rect.Contains(insidePoint)}");
-            Console.WriteLine($"Contains {outsidePoint}: {rect.Contains(outsidePoint)}");
         }
     }
 }
