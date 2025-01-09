@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Console Launch (SimConsole)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/SimConsole/bin/Debug/net8.0/SimConsole.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/SimConsole",
+            "stopAtEntry": false,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}
