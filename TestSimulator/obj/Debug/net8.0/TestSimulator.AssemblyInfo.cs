@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TestSimulator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2911f557561ea003f69137bb269fe94f6551bec")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee2f62109570555794ab9943381da8c159180321")]
 [assembly: System.Reflection.AssemblyProductAttribute("TestSimulator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TestSimulator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
