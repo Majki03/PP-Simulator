@@ -1,57 +1,40 @@
-namespace Simulator.Maps;
-
-/// <summary>
-/// Small square torus map.
-/// </summary>
-public class SmallTorusMap : Map
+namespace Simulator.Maps
 {
-    /// <summary>
-    /// Size of the torus map.
-    /// </summary>
-    public int Size { get; }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SmallTorusMap"/> class.
-    /// </summary>
-    /// <param name="size">Size of the map (must be between 5 and 20).</param>
-    public SmallTorusMap(int size)
+    public class SmallTorusMap : Map
     {
-        if (size < 5 || size > 20)
+        private readonly int _size;
+
+        public SmallTorusMap(int size)
         {
-            throw new ArgumentOutOfRangeException(nameof(size), "Size must be between 5 and 20.");
+            if (size < 5 || size > 20)
+                throw new ArgumentOutOfRangeException(nameof(size), "Size must be between 5 and 20.");
+
+            _size = size;
         }
-        Size = size;
-    }
 
-    /// <inheritdoc />
-    public override bool Exist(Point p)
-    {
-        return p.X >= 0 && p.X < Size && p.Y >= 0 && p.Y < Size;
-    }
+        public override bool Exist(Point p) => true;
 
-    /// <inheritdoc />
-    public override Point Next(Point p, Direction d)
-    {
-        return d switch
+        public override Point Next(Point p, Direction d)
         {
-            Direction.Up => new Point(p.X, (p.Y + 1) % Size),
-            Direction.Right => new Point((p.X + 1) % Size, p.Y),
-            Direction.Down => new Point(p.X, (p.Y - 1 + Size) % Size),
-            Direction.Left => new Point((p.X - 1 + Size) % Size, p.Y),
-            _ => p
-        };
-    }
+            Point next = p.Next(d);
+            return new Point(
+                (next.X + _size) % _size, // Tworzenie nowego obiektu z poprawionymi wartościami
+                (next.Y + _size) % _size
+            );
+        }
 
-    /// <inheritdoc />
-    public override Point NextDiagonal(Point p, Direction d)
-    {
-        return d switch
+        public override Point NextDiagonal(Point p, Direction d)
         {
-            Direction.Up => new Point((p.X + 1) % Size, (p.Y + 1) % Size),           // 45° from Up
-            Direction.Right => new Point((p.X + 1) % Size, (p.Y - 1 + Size) % Size), // 45° from Right
-            Direction.Down => new Point((p.X - 1 + Size) % Size, (p.Y - 1 + Size) % Size), // 45° from Down
-            Direction.Left => new Point((p.X - 1 + Size) % Size, (p.Y + 1) % Size), // 45° from Left
-            _ => p
-        };
+            Point next = p.NextDiagonal(d);
+            return new Point(
+                (next.X + _size) % _size, // Tworzenie nowego obiektu z poprawionymi wartościami
+                (next.Y + _size) % _size
+            );
+        }
+
+
+        public override int SizeX => _size;
+        public override int SizeY => _size;
+        public override int Size => _size; // Przesłania właściwość bazową
     }
 }

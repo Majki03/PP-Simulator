@@ -1,46 +1,51 @@
 using System;
 using System.Collections.Generic;
+using Simulator;
 using Simulator.Maps;
 
-namespace Simulator
+internal class Program
 {
-    internal class Program
+    private static void Main(string[] args)
     {
-        private static void Main(string[] args)
+        try
         {
-            RunSimulation();
-        }
-
-        private static void RunSimulation()
-        {
-            try
+            // Przygotowanie symulacji
+            SmallSquareMap map = new(5);
+            List<Creature> creatures = new()
             {
-                var map = new SmallSquareMap(10);
-                var creatures = new List<Creature>
-                {
-                    new Elf("Legolas"),
-                    new Orc("Gorbag")
-                };
-                var positions = new List<Point>
-                {
-                    new Point(0, 0),
-                    new Point(9, 9)
-                };
-                var moves = "URDL";
+                new Orc("Gorbag"),
+                new Elf("Elandor")
+            };
+            List<Point> points = new()
+            {
+                new Point(2, 2),
+                new Point(3, 1)
+            };
+            string moves = "dlrludl";
 
-                var simulation = new Simulation(map, creatures, positions, moves);
+            Simulation simulation = new(map, creatures, points, moves);
+            SimulationHistory simulationHistory = new(simulation);
 
-                while (!simulation.Finished)
+            // Uruchomienie symulacji
+            while (!simulation.Finished)
+            {
+                simulation.Turn();
+            }
+
+            // Wyświetlenie zapisanej historii symulacji
+            Console.WriteLine("Simulation History:");
+            foreach (var turnLog in simulationHistory.TurnLogs)
+            {
+                Console.WriteLine($"Turn: {turnLog.Mappable} moved {turnLog.Move}");
+                foreach (var entry in turnLog.Symbols)
                 {
-                    simulation.Turn();
+                    Console.WriteLine($"  Position {entry.Key}: {entry.Value}");
                 }
-
-                Console.WriteLine("Simulation completed successfully!");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
         }
     }
 }
