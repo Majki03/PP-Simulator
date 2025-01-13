@@ -1,92 +1,78 @@
 using System;
 using System.Collections.Generic;
 using Simulator;
-using Simulator.Maps;
 
-namespace Simulator
+namespace Simulator;
+
+public class SimulationHistory
 {
-    public class SimulationHistory
+    private readonly Simulation _simulation;
+    public int SizeX { get; }
+    public int SizeY { get; }
+    public List<SimulationTurnLog> TurnLogs { get; } = new();
+
+    public SimulationHistory(Simulation simulation)
     {
-        private Simulation _simulation { get; }
-        public int SizeX { get; }
-        public int SizeY { get; }
-        public List<SimulationTurnLog> TurnLogs { get; } = new();
+        _simulation = simulation ?? throw new ArgumentNullException(nameof(simulation));
+        SizeX = _simulation.Map.SizeX;
+        SizeY = _simulation.Map.SizeY;
+        StoreInitialState();
+        Run();
+    }
 
-        // Constructor
-        public SimulationHistory(Simulation simulation)
+    private void StoreInitialState()
+    {
+        var initialSymbols = new Dictionary<Point, char>();
+        for (int i = 0; i < _simulation.Creatures.Count; i++)
         {
-            _simulation = simulation ?? throw new ArgumentNullException(nameof(simulation));
-            SizeX = _simulation.Map.SizeX;
-            SizeY = _simulation.Map.SizeY;
+            var position = _simulation.Positions[i];
+            var creature = _simulation.Creatures[i];
+            char symbol = creature is Elf ? 'E' : 'O';
 
-            // Store the initial positions as the first log
-            StoreInitialState();
-            Run();
+            if (initialSymbols.ContainsKey(position))
+                initialSymbols[position] = 'X';
+            else
+                initialSymbols[position] = symbol;
         }
 
-        private void StoreInitialState()
+        TurnLogs.Add(new SimulationTurnLog
         {
-            var initialSymbols = new Dictionary<Point, char>();
+            Mappable = "Initial State",
+            Move = "None",
+            Symbols = initialSymbols
+        });
+    }
 
-            for (int i = 0; i < _simulation.Creatures.Count; i++)
-            {
-                var position = _simulation.Positions[i];
-                var creature = _simulation.Creatures[i];
-                char symbol = creature is Elf ? 'E' : 'O';
-
-                // Handle overlapping creatures
-                if (initialSymbols.ContainsKey(position))
-                    initialSymbols[position] = 'X';
-                else
-                    initialSymbols[position] = symbol;
-            }
-
-            TurnLogs.Add(new SimulationTurnLog
-            {
-                Mappable = "Initial State",
-                Move = "None",
-                Symbols = initialSymbols
-            });
-        }
-
-        private void Run()
+    private void Run()
+    {
+        while (!_simulation.Finished)
         {
-            while (!_simulation.Finished)
-            {
-                // Record the state before the turn
-                RecordCurrentState();
-
-                // Perform the next simulation turn
-                _simulation.Turn();
-            }
-
-            // Record the final state after the last move
             RecordCurrentState();
+            _simulation.Turn();
         }
+        RecordCurrentState();
+    }
 
-        private void RecordCurrentState()
+    private void RecordCurrentState()
+    {
+        var currentSymbols = new Dictionary<Point, char>();
+        for (int i = 0; i < _simulation.Creatures.Count; i++)
         {
-            var currentSymbols = new Dictionary<Point, char>();
+            var position = _simulation.Positions[i];
+            var creature = _simulation.Creatures[i];
+            char symbol = creature is Elf ? 'E' : 'O';
 
-            for (int i = 0; i < _simulation.Creatures.Count; i++)
-            {
-                var position = _simulation.Positions[i];
-                var creature = _simulation.Creatures[i];
-                char symbol = creature is Elf ? 'E' : 'O';
-
-                // Handle overlapping creatures
-                if (currentSymbols.ContainsKey(position))
-                    currentSymbols[position] = 'X';
-                else
-                    currentSymbols[position] = symbol;
-            }
-
-            TurnLogs.Add(new SimulationTurnLog
-            {
-                Mappable = _simulation.CurrentCreature.ToString(),
-                Move = _simulation.CurrentMoveName,
-                Symbols = currentSymbols
-            });
+            if (currentSymbols.ContainsKey(position))
+                currentSymbols[position] = 'X';
+            else
+                currentSymbols[position] = symbol;
         }
+
+        TurnLogs.Add(new SimulationTurnLog
+        {
+            Mappable = _simulation.CurrentCreature.ToString(),
+            Move = _simulation.CurrentMoveName,
+            Symbols = currentSymbols
+        });
     }
 }

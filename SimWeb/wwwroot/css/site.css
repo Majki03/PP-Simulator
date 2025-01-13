@@ -1,0 +1,71 @@
+body {
+  background-color: #1a2b23; /* Tło całej strony */
+  font-family: "Trebuchet MS", sans-serif; /* Ustawienie spójnej czcionki */
+  color: #fefefe; /* Jasny tekst */
+}
+
+.simulation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #2b2f33; /* Ciemny zielony */
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  max-width: 900px; /* Ograniczenie szerokości */
+  margin: auto;
+}
+
+.title {
+  font-size: 2.5em;
+  color: gold;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+
+.turn-info {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Zmień 7 na odpowiednią liczbę kolumn */
+  gap: 5px; /* Odstępy między kafelkami */
+  background-color: #2b2f33; /* Tło całej mapy */
+  padding: 20px; /* Ramka wokół mapy */
+  width: fit-content; /* Dopasowanie do zawartości */
+  margin: auto; /* Wyśrodkowanie mapy */
+}
+
+.grid-cell {
+  background: #3c763d; /* Kolor kafelków */
+  width: 80px; /* Szerokość kafelka */
+  height: 80px; /* Wysokość kafelka */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #2b5d34; /* Cienka ramka */
+  color: white;
+  font-size: 30px; /* Rozmiar liter */
+  font-weight: bold;
+  text-align: center;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 200px;
+}
+
+.arrow {
+  font-size: 2em;
+  text-decoration: none;
+  color: gold;
+  transition: color 0.3s;
+}
+
+.arrow:hover {
+  color: white;
+}

@@ -1,0 +1,56 @@
+﻿@page
+@model SimWeb.Pages.IndexModel
+@{
+    ViewData["Title"] = "Welcome to Fantasy World!";
+}
+
+<div class="main-container">
+    <div class="welcome">
+        <h1>Welcome to the World of Orks and Elves!</h1>
+        <p>Embark on a journey through this magical simulation. Watch as orks and elves navigate through this mystical land.</p>
+        <a class="start-button" href="/Simulation">Start Simulation</a>
+    </div>
+</div>
+
+<style>
+    body {
+        background-image: url('/images/fantasy-bg.jpg');
+        background-size: cover;
+        font-family: 'Cinzel', serif;
+        color: white;
+    }
+
+    .main-container {
+        text-align: center;
+        margin-top: 20vh;
+    }
+
+    .welcome h1 {
+        font-size: 3em;
+        color: gold;
+        text-shadow: 2px 2px 8px black;
+    }
+
+    .welcome p {
+        font-size: 1.5em;
+        margin: 20px 0;
+    }
+
+    .start-button {
+        display: inline-block;
+        padding: 15px 30px;
+        font-size: 1.2em;
+        background: darkred;
+        color: white;
+        border: 2px solid gold;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .start-button:hover {
+        background: gold;
+        color: darkred;
+        transform: scale(1.1);
+    }
+</style>

@@ -1,0 +1,34 @@
+﻿@page
+@model SimWeb.Pages.Simulation.IndexModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulation Viewer</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+    <div class="simulation-container">
+        <h1 class="title">Simulation Viewer</h1>
+        <p class="turn-info">Current Turn: @Model.CurrentTurn / @(Model.TotalTurns - 1)</p>
+
+        <div class="grid" style="grid-template-columns: repeat(@Model.GridSize, 1fr);">
+        @for (int y = 0; y < @Model.GridSize; y++)
+        {
+            @for (int x = 0; x < @Model.GridSize; x++)
+            {
+                var symbol = Model.GetSymbol(x, y);
+                <div class="grid-cell">@symbol</div>
+            }
+        }
+        </div>
+
+        <div class="navigation">
+            <a class="arrow prev" asp-page="/Simulation/Index" asp-route-turn="@(Model.CurrentTurn - 1)">&#8592;</a>
+            <a class="arrow next" asp-page="/Simulation/Index" asp-route-turn="@(Model.CurrentTurn + 1)">&#8594;</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,28 +1,81 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulator", "Simulator\Simulator.csproj", "{4D6E5E90-C1BD-4502-8F8E-A54BEBE31912}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSimulator", "TestSimulator\TestSimulator.csproj", "{74513297-6F65-45FD-94A0-1BC93E813251}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4D6E5E90-C1BD-4502-8F8E-A54BEBE31912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4D6E5E90-C1BD-4502-8F8E-A54BEBE31912}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4D6E5E90-C1BD-4502-8F8E-A54BEBE31912}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4D6E5E90-C1BD-4502-8F8E-A54BEBE31912}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74513297-6F65-45FD-94A0-1BC93E813251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74513297-6F65-45FD-94A0-1BC93E813251}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74513297-6F65-45FD-94A0-1BC93E813251}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74513297-6F65-45FD-94A0-1BC93E813251}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-EndGlobal
+﻿<style>
+    body {
+        background: #2f4f2f;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .simulation-container {
+        margin: 20px auto;
+        padding: 20px;
+        max-width: 1000px;
+    }
+
+    h1 {
+    color: #ffd700; /* Złoty kolor nagłówka */
+    text-align: center;
+    font-size: 50px; /* Powiększenie nagłówka */
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #ffd700; /* Poświata dla nagłówka */
+    }
+
+    h2 {
+        font-size: 1.2em;
+        color: #dcdcdc;
+    }
+
+    .map-container {
+        display: inline-block;
+        background-color: #006400;
+        padding: 5px;
+        border: 2px solid #8b4513;
+        border-radius: 10px;
+    }
+
+    .map-row {
+        display: flex;
+    }
+
+    .map-tile {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #8b4513;
+        font-size: 1.5em;
+        color: #fff;
+        background-color: #228b22;
+        margin: 0;
+        padding: 0;
+    }
+
+    .map-tile:nth-child(odd) {
+        background-color: #32cd32;
+    }
+
+    .map-tile:nth-child(even) {
+        background-color: #228b22;
+    }
+
+    .navigation-buttons {
+        margin-top: 20px;
+    }
+
+    .arrow-button {
+        background: transparent;
+        border: none;
+        font-size: 40px;
+        color: #ffd700;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .arrow-button:hover {
+        background: #ff4500;
+        transform: scale(1.2); /* Powiększenie przy najechaniu */
+    }
+</style>
